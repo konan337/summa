@@ -1,0 +1,25 @@
+from collections import deque
+queue = deque()
+
+while True:
+    print("\n1. Add Event  2. Process Event  3. Display Events  4. Cancel Event  5. Exit")
+    ch = int(input("Enter choice: "))
+    if ch == 1:
+        e = input("Enter event: ")
+        queue.append(e)
+    elif ch == 2:
+        if queue:
+            print("Processed:", queue.popleft())
+        else:
+            print("No events.")
+    elif ch == 3:
+        print("Pending:", list(queue))
+    elif ch == 4:
+        e = input("Enter event to cancel: ")
+        if e in queue:
+            queue.remove(e)
+            print("Cancelled:", e)
+        else:
+            print("Not found.")
+    elif ch == 5:
+        break

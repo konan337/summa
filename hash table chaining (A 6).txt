@@ -1,0 +1,36 @@
+class HashTable:
+    def __init__(self):
+        self.size = 10
+        self.table = [[] for _ in range(self.size)]
+
+    def hash_func(self, key):
+        return key % self.size
+
+    def insert(self, key, value):
+        i = self.hash_func(key)
+        self.table[i].append((key, value))
+
+    def search(self, key):
+        i = self.hash_func(key)
+        for k, v in self.table[i]:
+            if k == key:
+                return v
+        return None
+
+    def display(self):
+        for i in range(self.size):
+            print(i, ":", self.table[i])
+
+ht = HashTable()
+while True:
+    print("\n1. Insert  2. Search  3. Display  4. Exit")
+    ch = int(input("Enter choice: "))
+    if ch == 1:
+        ht.insert(int(input("Key: ")), input("Value: "))
+    elif ch == 2:
+        v = ht.search(int(input("Enter key: ")))
+        print("Found:", v if v else "Not found")
+    elif ch == 3:
+        ht.display()
+    elif ch == 4:
+        break

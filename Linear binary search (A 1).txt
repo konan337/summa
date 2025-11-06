@@ -1,0 +1,27 @@
+def linear_search(lst, key):
+    for i in range(len(lst)):
+        if lst[i] == key:
+            return i
+    return -1
+
+def binary_search(lst, key):
+    low = 0
+    high = len(lst) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if lst[mid] == key:
+            return mid
+        elif lst[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+n = int(input("Enter number of customer IDs: "))
+lst = []
+for i in range(n):
+    lst.append(int(input(f"Enter Customer ID {i+1}: ")))
+key = int(input("Enter ID to search: "))
+print("Linear Search:", "Found" if linear_search(lst, key) != -1 else "Not Found")
+lst.sort()
+print("Binary Search:", "Found" if binary_search(lst, key) != -1 else "Not Found")

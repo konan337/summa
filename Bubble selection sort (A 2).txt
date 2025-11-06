@@ -1,0 +1,22 @@
+def selection_sort(lst):
+    for i in range(len(lst)):
+        min_index = i
+        for j in range(i + 1, len(lst)):
+            if lst[j] < lst[min_index]:
+                min_index = j
+        lst[i], lst[min_index] = lst[min_index], lst[i]
+    return lst
+
+def bubble_sort(lst):
+    n = len(lst)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+n = int(input("Enter number of employees: "))
+salaries = [float(input(f"Enter salary {i+1}: ")) for i in range(n)]
+print("Selection Sort:", selection_sort(salaries.copy()))
+print("Bubble Sort:", bubble_sort(salaries.copy()))
+print("Top 5 Highest Salaries:", sorted(salaries, reverse=True)[:5])

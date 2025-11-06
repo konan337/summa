@@ -1,0 +1,35 @@
+from collections import deque
+
+def bfs(adj_list, start):
+    visited = set()
+    q = deque([start])
+    while q:
+        v = q.popleft()
+        if v not in visited:
+            print(v, end=" ")
+            visited.add(v)
+            q.extend(adj_list[v] - visited)
+
+def dfs(adj_matrix, start, visited):
+    print(start, end=" ")
+    visited[start] = True
+    for i in range(len(adj_matrix)):
+        if adj_matrix[start][i] == 1 and not visited[i]:
+            dfs(adj_matrix, i, visited)
+
+n = int(input("Enter number of nodes: "))
+adj_list = {}
+for i in range(n):
+    node = input(f"Enter node name {i+1}: ")
+    adj_list[node] = set(input(f"Enter connected nodes for {node} (space separated): ").split())
+
+print("\nBFS Traversal:")
+bfs(adj_list, list(adj_list.keys())[0])
+
+print("\n\nDFS Traversal:")
+matrix = []
+for i in range(n):
+    row = list(map(int, input(f"Enter adjacency matrix row {i+1}: ").split()))
+    matrix.append(row)
+visited = [False] * n
+dfs(matrix, 0, visited)
